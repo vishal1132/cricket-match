@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>
+            test title
+        </title>
+		<meta charset="utf-8"/>
+        <script src="../js/wasm_exec.js"></script>
+        <script>
+			const go = new Go();
+			WebAssembly.instantiateStreaming(fetch("../js/json.wasm"), go.importObject).then((result) => {
+				go.run(result.instance);
+			});
+		</script>
+    </head>
+    <body>
+        <h1>Go WASM github pages test</h1>
+    </body>
+</html>

@@ -7,12 +7,33 @@
         <script src="../js/wasm_exec.js"></script>
         <script>
 			const go = new Go();
-			WebAssembly.instantiateStreaming(fetch("../js/json.wasm"), go.importObject).then((result) => {
+			WebAssembly.instantiateStreaming(fetch("../js/match.wasm"), go.importObject).then((result) => {
 				go.run(result.instance);
 			});
 		</script>
     </head>
     <body>
-        <h1>Go WASM github pages test</h1>
+        <h1>Cricket Match for 08/07/2021 Tursday between the two legendary captains- Ashish and Ishan</h1>
+        <br>
+        <h3>If you want to play the match today, please submit your name here.</h3>
+        <textarea name="name" id="nameinput" cols="70" rows="2"></textarea>
+        <input id="button" type="submit" name="button" value="add me" onclick="addplayer(nameinput.value)"/>
+        <!-- <input id="submit-name-button" onclick="addplayer(name-input.value)" type="submit" name="button"/> -->
+        <h3>Players So Far...</h3>
+        <br>
+        <textarea name="players" id="nameoutput" cols=70 rows="40"></textarea>
     </body>
+    <script>
+        var addplayer = function(input) {
+        var result = addPlayer(input)
+			if (( result != null) && ('error' in result)) {
+				console.log("Go return value", result)
+				jsonoutput.value = ""
+				alert(result.error)
+			}
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => { addplayer("")}, 200);
+        }, false);
+     </script>
 </html>
